@@ -11,9 +11,9 @@ namespace TestAgain.Controllers
         private readonly IDepartmentRepository _department;
         public DepartmentController(IDepartmentRepository department)
         {
-            _department = department ??
-                throw new ArgumentNullException(nameof(department));
+            _department = department;
         }
+
         [HttpGet]
         [Route("GetDepartment")]
         public async Task<IActionResult> Get()

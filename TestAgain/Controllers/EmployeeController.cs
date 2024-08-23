@@ -13,10 +13,8 @@ namespace TestAgain.Controllers
         private readonly IDepartmentRepository _department;
         public EmployeeController(IEmployeeRepository employee, IDepartmentRepository department, IWebHostEnvironment env)
         {
-            _employee = employee ??
-                throw new ArgumentNullException(nameof(employee));
-            _department = department ??
-                throw new ArgumentNullException(nameof(department));
+            _employee = employee;
+            _department = department;
             _env = env;
         }
 

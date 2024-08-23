@@ -8,8 +8,7 @@ namespace TestAgain.Repository
         private readonly APIDbContext _appDBContext;
         public DepartmentRepository(APIDbContext context)
         {
-            _appDBContext = context ??
-                throw new ArgumentNullException(nameof(context));
+            _appDBContext = context;
         }
         public async Task<IEnumerable<Department>> GetDepartment()
         {
