@@ -11,7 +11,7 @@ namespace TestAgain.Tests
 {
     public class EmployeeControllerTests
     {
-        private readonly EmployeeController _controller;
+        private readonly EmployeeController _EmployeeController;
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IDepartmentRepository _departmentRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -37,13 +37,13 @@ namespace TestAgain.Tests
             _webHostEnvironment = Mock.Of<IWebHostEnvironment>(env =>
                 env.ContentRootPath == Directory.GetCurrentDirectory());
 
-            _controller = new EmployeeController(_employeeRepository, _departmentRepository, _webHostEnvironment);
+            _EmployeeController = new EmployeeController(_employeeRepository, _departmentRepository, _webHostEnvironment);
         }
 
         [Fact]
         public async Task GetEmployee()
         {
-            var result = await _controller.Get();
+            var result = await _EmployeeController.Get();
 
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<List<Employee>>(okResult.Value);
@@ -56,7 +56,7 @@ namespace TestAgain.Tests
         {
             var employeeId = 16;
 
-            var result = await _controller.GetEmpByID(employeeId);
+            var result = await _EmployeeController.GetEmpByID(employeeId);
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<Employee>(okResult.Value);
             Assert.Equal(employeeId, returnValue.EmployeeID);
@@ -68,12 +68,12 @@ namespace TestAgain.Tests
             
             var newEmployee = new Employee
             {
-                EmployeeName = "Raza",
+                EmployeeName = "Hasnain",
                 Department = "IT", 
                 DOJ = DateTime.Now
             };
 
-            var result = await _controller.Post(newEmployee);
+            var result = await _EmployeeController.Post(newEmployee);
 
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal("Added Successfully", okResult.Value);
@@ -81,9 +81,9 @@ namespace TestAgain.Tests
             using (var context = new APIDbContext(_options))
             {
                 var addedEmployee = await context.Employees
-                    .FirstOrDefaultAsync(d => d.EmployeeName == "Raza");
+                    .FirstOrDefaultAsync(d => d.EmployeeName == "Hasnain");
                 Assert.NotNull(addedEmployee);
-                Assert.Equal("Raza", addedEmployee.EmployeeName);
+                Assert.Equal("Hasnain", addedEmployee.EmployeeName);
                 Assert.Equal("IT", addedEmployee.Department);
             }
         }

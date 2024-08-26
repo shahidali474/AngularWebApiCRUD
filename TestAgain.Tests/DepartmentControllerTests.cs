@@ -13,7 +13,7 @@ namespace TestAgain.Tests
 {
     public class DepartmentControllerTests
     {
-        private readonly DepartmentController _controller;
+        private readonly DepartmentController _departmentController;
         private readonly IDepartmentRepository _repository;
         private readonly DbContextOptions<APIDbContext> _options;
         private readonly IConfiguration _configuration;
@@ -33,14 +33,14 @@ namespace TestAgain.Tests
                 .Options;
 
             _repository = new DepartmentRepository(new APIDbContext(_options));
-            _controller = new DepartmentController(_repository);
+            _departmentController = new DepartmentController(_repository);
         }
 
         [Fact]
         public async Task GetDepartment()
         {
 
-            var result = await _controller.Get();
+            var result = await _departmentController.Get();
 
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<List<Department>>(okResult.Value);
@@ -54,7 +54,7 @@ namespace TestAgain.Tests
 
             var departmentId = 24;
 
-            var result = await _controller.GetDeptById(departmentId);
+            var result = await _departmentController.GetDeptById(departmentId);
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<Department>(okResult.Value);
             Assert.Equal(departmentId, returnValue.DepartmentId);
@@ -65,7 +65,7 @@ namespace TestAgain.Tests
         {
             var newDepartment = new Department { DepartmentName = "IT" };
 
-            var result = await _controller.Post(newDepartment);
+            var result = await _departmentController.Post(newDepartment);
 
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal("Added Successfully", okResult.Value);
