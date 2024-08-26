@@ -49,7 +49,7 @@ namespace TestAgain.Controllers
             await _department.UpdateDepartment(dep);
             return Ok("Updated Successfully");
         }
-      
+
         [HttpDelete("DeleteDepartment/{id}")]
         public JsonResult Delete(int id)
         {
@@ -64,6 +64,5 @@ namespace TestAgain.Controllers
                 return new JsonResult(new { message = "Error: Department not found" });
             }
         }
-
     }
 }
