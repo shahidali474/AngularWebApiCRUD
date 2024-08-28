@@ -9,7 +9,7 @@ using TestAgain.Models;
 using TestAgain.Repository;
 using Xunit;
 
-namespace TestAgain.Tests
+namespace TestAgain.Tests.Controllers
 {
     public class DepartmentControllerTests
     {
@@ -78,36 +78,36 @@ namespace TestAgain.Tests
             }
         }
 
-        //[Fact]
-        //public async Task DeleteDepartment_ReturnsJsonResult_WithSuccessMessage_WhenDepartmentIsDeleted()
-        //{
-        //    var departmentId = 1;
+        [Fact]
+        public async Task DeleteDepartment_ReturnsJsonResult_WithSuccessMessage_WhenDepartmentIsDeleted()
+        {
+            var departmentId = 1;
 
-        //    using (var context = new APIDbContext(_options))
-        //    {
-        //        var existingDepartment = await context.Departments.FindAsync(departmentId);
-        //        Assert.NotNull(existingDepartment);
-        //    }
+            using (var context = new APIDbContext(_options))
+            {
+                var existingDepartment = await context.Departments.FindAsync(departmentId);
+                Assert.NotNull(existingDepartment);
+            }
 
-        //    var result = await _controller.Delete(departmentId);
+            var result = await _departmentController.Delete(departmentId);
 
-        //    var jsonResult = Assert.IsType<JsonResult>(result);
-        //    var resultValue = jsonResult.Value;
+            var jsonResult = Assert.IsType<JsonResult>(result);
+            var resultValue = jsonResult.Value;
 
-        //    Assert.NotNull(resultValue);
+            Assert.NotNull(resultValue);
 
-        //    var dictionary = resultValue as IDictionary<string, object>;
-        //    Assert.NotNull(dictionary);
+            var dictionary = resultValue as IDictionary<string, object>;
+            Assert.NotNull(dictionary);
 
-        //    Assert.True(dictionary.ContainsKey("message"));
-        //    Assert.Equal("Deleted Successfully", dictionary["message"].ToString());
+            Assert.True(dictionary.ContainsKey("message"));
+            Assert.Equal("Deleted Successfully", dictionary["message"].ToString());
 
-        //    using (var context = new APIDbContext(_options))
-        //    {
-        //        var deletedDepartment = await context.Departments.FindAsync(departmentId);
-        //        Assert.Null(deletedDepartment);
-        //    }
-        //}
+            using (var context = new APIDbContext(_options))
+            {
+                var deletedDepartment = await context.Departments.FindAsync(departmentId);
+                Assert.Null(deletedDepartment);
+            }
+        }
 
     }
 }

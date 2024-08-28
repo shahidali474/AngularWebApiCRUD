@@ -7,7 +7,7 @@ using TestAgain.Controllers;
 using TestAgain.Models;
 using TestAgain.Repository;
 
-namespace TestAgain.Tests
+namespace TestAgain.Tests.Controllers
 {
     public class EmployeeControllerTests
     {
@@ -65,11 +65,11 @@ namespace TestAgain.Tests
         [Fact]
         public async Task AddEmployee()
         {
-            
+
             var newEmployee = new Employee
             {
                 EmployeeName = "Hasnain",
-                Department = "IT", 
+                Department = "IT",
                 DOJ = DateTime.Now
             };
 
